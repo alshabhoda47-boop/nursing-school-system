@@ -922,7 +922,7 @@
      أداء الامتحان
   ========================= */
 
-async function beginExam(examId) {
+  async function beginExam(examId) {
   try {
     const data = await run(
       db.rpc("start_exam_attempt", {
@@ -1014,8 +1014,7 @@ async function beginExam(examId) {
     function tick() {
       const left = Math.max(
         0,
-        new Date(a.expiresAt).getTime() - Date.now()
-      );
+        new Date(a.expiresAt).getTime() - (Date.now() + a.serverOffset)
 
       const minutes = Math.floor(left / 60000);
       const seconds = Math.floor((left % 60000) / 1000);
