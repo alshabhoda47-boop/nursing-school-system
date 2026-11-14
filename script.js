@@ -930,14 +930,21 @@
         })
       );
 
-      activeAttempt = {
-        id: data.attempt_id,
-        expiresAt: data.expires_at,
-        questions: data.questions,
-        answers: {}
-      };
+    console.log("EXAM DATA:", data);
+console.log("EXPIRES:", data.expires_at);
+console.log(
+  "TIME LEFT:",
+  new Date(data.expires_at).getTime() - Date.now()
+);
 
-      renderAttempt();
+activeAttempt = {
+  id: data.attempt_id,
+  expiresAt: data.expires_at,
+  questions: data.questions,
+  answers: {}
+};
+
+renderAttempt();
 
     } catch (error) {
       showMessage("تعذر بدء الامتحان: " + error.message);
