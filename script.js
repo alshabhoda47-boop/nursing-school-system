@@ -922,34 +922,36 @@
      أداء الامتحان
   ========================= */
 
-  async function beginExam(examId) {
-    try {
-      const data = await run(
-        db.rpc("start_exam_attempt", {
-          p_exam_id: examId
-        })
-      );
+async function beginExam(examId) {
+  try {
+    const data = await run(
+      db.rpc("start_exam_attempt", {
+        p_exam_id: examId
+      })
+    );
 
-    console.log("EXAM DATA:", data);
-console.log("EXPIRES:", data.expires_at);
-console.log(
-  "TIME LEFT:",
-  new Date(data.expires_at).getTime() - Date.now()
-);
+    // جلب توقيت السيرفر لحساب فرق الساعة
+    const serverTime = await run(
+      db.rpc("get_server_time")
+    );
 
-activeAttempt = {
-  id: data.attempt_id,
-  expiresAt: data.expires_at,
-  questions: data.questions,
-  answers: {}
-};
+    const serverOffset =
+      new Date(serverTime).getTime() - Date.now();
 
-renderAttempt();
+    activeAttempt = {
+      id: data.attempt_id,
+      expiresAt: data.expires_at,
+      serverOffset: serverOffset,
+      questions: data.questions,
+      answers: {}
+    };
 
-    } catch (error) {
-      showMessage("تعذر بدء الامتحان: " + error.message);
-    }
+    renderAttempt();
+
+  } catch (error) {
+    showMessage("تعذر بدء الامتحان: " + error.message);
   }
+}
 
   function renderAttempt() {
     const a = activeAttempt;
