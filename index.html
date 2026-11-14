@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b35">
+  <title>مدرسة الجيزة الفنية للتمريض براجيل</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">✚</div>
+    <div><h1>مدرسة الجيزة الفنية للتمريض براجيل</h1><p>نظام الإدارة التعليمية والاختبارات</p></div>
+    <button id="logoutBtn" class="btn ghost hidden">تسجيل الخروج</button>
+  </header>
+  <main class="container">
+    <section id="loginView" class="login-card">
+      <div class="section-icon">✚</div>
+      <h2>تسجيل الدخول</h2>
+      <p class="muted">أدخل بيانات الحساب المخصص لك</p>
+      <form id="loginForm">
+        <label>البريد الإلكتروني<input id="email" type="email" autocomplete="username" required></label>
+        <label>كلمة المرور<input id="password" type="password" autocomplete="current-password" required></label>
+        <button class="btn primary full" type="submit">دخول</button>
+      </form>
+      <p id="loginMessage" class="message" role="status"></p>
+    </section>
+    <section id="appView" class="hidden">
+      <div class="welcome panel">
+        <div><span class="eyebrow">لوحة التحكم</span><h2 id="welcomeTitle">مرحبًا</h2><p id="userRole" class="muted"></p></div>
+        <div class="avatar">✚</div>
+      </div>
+      <nav id="tabs" class="tabs"></nav>
+      <div id="content" class="panel"></div>
+      <p id="appMessage" class="message" role="status"></p>
+    </section>
+  </main>
+  <footer>© مدرسة الجيزة الفنية للتمريض براجيل</footer>
+</body>
+</html>
